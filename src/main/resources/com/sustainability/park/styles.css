@@ -1,0 +1,11 @@
+.root {
+    -fx-background-color: gray;
+}
+
+.label {
+    /*-fx-text-fill: white;*/
+}
+
+#plantsContainer1, #plantsContainer2 {
+    -fx-background-color: green;
+}
