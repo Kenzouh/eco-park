@@ -9,3 +9,7 @@
 #plantsContainer1, #plantsContainer2 {
     -fx-background-color: green;
 }
+
+.combo-box {
+    -fx-text-fill: black;
+}

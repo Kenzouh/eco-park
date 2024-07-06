@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sustainability.park.AddController">
+    <center>
+        <AnchorPane prefHeight="182.0" prefWidth="359.0" BorderPane.alignment="CENTER" />
+    </center>
+    <top>
+        <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <tabs>
+                <!-- Animal Tab -->
+                <Tab text="ANIMALS">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0">
+                            <children>
+                                <ImageView fitHeight="370.0" fitWidth="600.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                                <TextField fx:id="commonNameField" layoutX="144.0" layoutY="89.0" prefHeight="35.0" prefWidth="130.0" promptText="COMMON NAME" />
+                                <TextField fx:id="dietField" layoutX="144.0" layoutY="189.0" prefHeight="35.0" prefWidth="130.0" promptText="DIET" />
+                                <TextField fx:id="populationField" layoutX="326.0" layoutY="139.0" prefHeight="35.0" prefWidth="130.0" promptText="POPULATION" />
+                                <TextField fx:id="animalLifespanField" layoutX="144.0" layoutY="239.0" prefHeight="35.0" prefWidth="130.0" promptText="LIFESPAN" />
+                                <ComboBox fx:id="areaComboBox" layoutX="326.0" layoutY="89.0" prefHeight="35.0" prefWidth="130.0" promptText="Select Area" visibleRowCount="3" />
+                                <ComboBox fx:id="animalTypeComboBox" layoutX="144.0" layoutY="139.0" prefHeight="35.0" prefWidth="130.0" promptText="Select Animal Type" visibleRowCount="3" />
+                                <Text layoutX="200.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SPECIES" textAlignment="CENTER" wrappingWidth="200.53668212890625">
+                                    <font>
+                                        <Font size="30.0" />
+                                    </font>
+                                </Text>
+                                <Button fx:id="addAnimal" layoutX="169.0" layoutY="312.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="SAVE" />
+                                <Text layoutX="66.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME" />
+                                <Text layoutX="66.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TYPE" />
+                                <Text layoutX="66.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DIET" />
+                                <Text layoutX="488.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AREA" />
+                                <Text layoutX="488.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POPULATION" />
+                                <Text layoutX="66.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIFESPAN" />
+                                <Button fx:id="exitAnimals" layoutX="351.0" layoutY="312.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="EXIT" />
+                                <TextField fx:id="habitatField" layoutX="326.0" layoutY="189.0" prefHeight="35.0" prefWidth="130.0" promptText="HABITAT" />
+                                <Text layoutX="488.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HABITAT" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <!-- Plants Tab -->
+                <Tab text="PLANTS">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0">
+                            <children>
+                                <ImageView fitHeight="370.0" fitWidth="600.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                                <TextField fx:id="plantCommonNameField" layoutX="144.0" layoutY="89.0" prefHeight="35.0" prefWidth="130.0" promptText="COMMON NAME" />
+                                <TextField fx:id="plantLifespanField" layoutX="326.0" layoutY="89.0" prefHeight="35.0" prefWidth="130.0" promptText="LIFESPAN" />
+                                <ComboBox fx:id="plantTypeComboBox" layoutX="144.0" layoutY="139.0" prefHeight="35.0" prefWidth="130.0" promptText="Select Plant Type" styleClass="combo-box" stylesheets="@styles.css" visibleRowCount="3" />
+                                <Text layoutX="200.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLANTS" textAlignment="CENTER" wrappingWidth="200.53668212890625">
+                                    <font>
+                                        <Font size="30.0" />
+                                    </font>
+                                </Text>
+                                <Button fx:id="addPlants" layoutX="169.0" layoutY="312.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="SAVE" />
+                                <Text layoutX="66.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME" />
+                                <Text layoutX="66.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TYPE" />
+                                <Text layoutX="488.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIFESPAN" />
+                                <ComboBox fx:id="plantAreaComboBox" layoutX="326.0" layoutY="139.0" prefHeight="35.0" prefWidth="130.0" promptText="Select Area" visibleRowCount="3" />
+                                <Text layoutX="488.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AREA" />
+                                <Button fx:id="exitPlants" layoutX="351.0" layoutY="312.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="EXIT" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <!-- Waste Tab -->
+                <Tab text="WASTE">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0">
+                            <children>
+                                <ImageView fitHeight="370.0" fitWidth="600.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                                <ComboBox fx:id="wasteTypeComboBox" layoutX="326.0" layoutY="87.0" prefHeight="35.0" prefWidth="130.0" promptText="Select Waste Type" visibleRowCount="3" />
+                                <ComboBox fx:id="wasteAreaComboBox" layoutX="326.0" layoutY="189.0" prefHeight="35.0" prefWidth="130.0" promptText="Select Area" visibleRowCount="3" />
+                                <Text layoutX="200.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WASTE" textAlignment="CENTER" wrappingWidth="200.53668212890625">
+                                    <font>
+                                        <Font size="30.0" />
+                                    </font>
+                                </Text>
+                                <Button fx:id="addWaste" layoutX="169.0" layoutY="312.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="SAVE" />
+                                <Text layoutX="144.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WASTE TYPE" />
+                                <Text layoutX="144.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DISPOSAL DATE" />
+                                <Text layoutX="144.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AREA" />
+                                <Button fx:id="exitWaste" layoutX="351.0" layoutY="312.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="EXIT" />
+                                <DatePicker fx:id="disposalDateField" layoutX="326.0" layoutY="139.0" prefHeight="35.0" prefWidth="130.0" promptText="DISPOSAL DATE" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="INITIATIVES">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </top>
+</BorderPane>

@@ -9,14 +9,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class PlantsApplication extends Application {
+public class AnimalApplication extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/sustainability/park/plants_view.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/sustainability/park/animal_view.fxml")));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/sustainability/park/styles.css")).toExternalForm());
 
-        stage.setTitle("PLANTS");
+        stage.setTitle("ANIMAL");
         stage.setScene(scene);
         stage.show();
     }

@@ -9,19 +9,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class PlantsApplication extends Application {
+public class LogIn_Page extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/sustainability/park/plants_view.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/sustainability/park/LogIn.fxml")));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/sustainability/park/styles.css")).toExternalForm());
-
-        stage.setTitle("PLANTS");
+        stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
+
     }
 }
