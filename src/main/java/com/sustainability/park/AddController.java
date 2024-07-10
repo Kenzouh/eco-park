@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.stage.Stage;
 
 public class AddController {
     @FXML
@@ -91,17 +92,47 @@ public class AddController {
 
     @FXML
     private void handleExitWaste(ActionEvent actionEvent) {
-        // same logic of exiting
+        Stage stage = (Stage) exitWaste.getScene().getWindow();
+        stage.close();
+
+        WasteApplication wasteApp = new WasteApplication();
+        Stage wasteStage = new Stage();
+
+        try {
+            wasteApp.start(wasteStage);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Failed to launch PlantsApplication", e);
+        }
     }
 
     @FXML
     private void handleExitPlants(ActionEvent actionEvent) {
-        // same logic of exiting
+        Stage stage = (Stage) exitPlants.getScene().getWindow();
+        stage.close();
+
+        PlantsApplication plantsApp = new PlantsApplication();
+        Stage plantsStage = new Stage();
+
+        try {
+            plantsApp.start(plantsStage);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Failed to launch PlantsApplication", e);
+        }
     }
 
     @FXML
     private void handleExitAnimal(ActionEvent actionEvent) {
-        // same logic of exiting
+        Stage stage = (Stage) exitAnimals.getScene().getWindow();
+        stage.close();
+
+        AnimalApplication animalApp = new AnimalApplication();
+        Stage animalStage = new Stage();
+
+        try {
+            animalApp.start(animalStage);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Failed to launch PlantsApplication", e);
+        }
     }
 
     @FXML
@@ -180,9 +211,25 @@ public class AddController {
     @FXML
     private void handleAddPlants(ActionEvent actionEvent) {
         String commonName = plantCommonNameField.getText();
-        int lifespan = Integer.parseInt(plantLifespanField.getText());
         String plantType = plantTypeComboBox.getValue();
-        String area = plantAreaComboBox.getValue();
+        String lifespanText = plantLifespanField.getText();
+        String area = plantAreaComboBox.getValue();  // Corrected from areaComboBox to plantAreaComboBox
+
+        if (commonName == null || commonName.isEmpty() ||
+                plantType == null || plantType.isEmpty() ||
+                lifespanText == null || lifespanText.isEmpty() ||
+                area == null || area.isEmpty()) {
+            System.out.println("Please make sure all fields are filled out.");
+            return;
+        }
+
+        int lifespan;
+        try {
+            lifespan = Integer.parseInt(lifespanText);
+        } catch (NumberFormatException e) {
+            System.out.println("Lifespan must be a valid integer.");
+            return;
+        }
 
         Connection connection = null;
         try {
@@ -190,34 +237,55 @@ public class AddController {
             if (connection != null) {
                 connection.setAutoCommit(false);
 
-                // Insert into plant_information
-                String insertPlantInfo = "INSERT INTO plant_information (common_name, plant_type, lifespan) VALUES (?, ?, ?)";
-                try (PreparedStatement plantInfoStatement = connection.prepareStatement(insertPlantInfo, Statement.RETURN_GENERATED_KEYS)) {
-                    plantInfoStatement.setString(1, commonName);
-                    plantInfoStatement.setString(2, plantType);
-                    plantInfoStatement.setInt(3, lifespan);
-                    plantInfoStatement.executeUpdate();
+                // Insert into plant_species (assuming common_name is unique)
+                String insertPlantSpecies = "INSERT INTO plant_information (common_name, plant_type, lifespan) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE plant_species_id = LAST_INSERT_ID(plant_species_id)";
+                int speciesId = -1;
+                try (PreparedStatement speciesStatement = connection.prepareStatement(insertPlantSpecies, Statement.RETURN_GENERATED_KEYS)) {
+                    speciesStatement.setString(1, commonName);
+                    speciesStatement.setString(2, plantType);
+                    speciesStatement.setInt(3, lifespan);
+                    speciesStatement.executeUpdate();
 
-                    // Retrieve the generated plant_id
-                    ResultSet generatedKeys = plantInfoStatement.getGeneratedKeys();
-                    int plantId = -1;
-                    if (generatedKeys.next()) {
-                        plantId = generatedKeys.getInt(1);
+                    // Retrieve the generated plant_species_id
+                    ResultSet generatedSpeciesKeys = speciesStatement.getGeneratedKeys();
+                    if (generatedSpeciesKeys.next()) {
+                        speciesId = generatedSpeciesKeys.getInt(1);
                     } else {
-                        throw new SQLException("Inserting plant information failed, no ID obtained.");
+                        throw new SQLException("Inserting plant species failed, no ID obtained.");
                     }
-
-                    // Insert into park_area (assuming park_area_name is unique and handled separately)
-                    String insertParkArea = "INSERT INTO park_areas (park_area_name) VALUES (?)";
-                    try (PreparedStatement parkAreaStatement = connection.prepareStatement(insertParkArea)) {
-                        parkAreaStatement.setString(1, area);
-                        parkAreaStatement.executeUpdate();
-                    }
-
-                    // Commit transaction
-                    connection.commit();
-                    System.out.println("Plant and Park Area added successfully.");
                 }
+
+                // Insert into park_areas if not exists
+                String insertParkArea = "INSERT INTO park_areas (park_area_name) VALUES (?) ON DUPLICATE KEY UPDATE park_area_name = park_area_name";
+                try (PreparedStatement parkAreaStatement = connection.prepareStatement(insertParkArea, Statement.RETURN_GENERATED_KEYS)) {
+                    parkAreaStatement.setString(1, area);
+                    parkAreaStatement.executeUpdate();
+                }
+
+                // Get area_id based on area name
+                String getAreaIdQuery = "SELECT area_id FROM park_areas WHERE park_area_name = ?";
+                int areaId = -1;
+                try (PreparedStatement areaStatement = connection.prepareStatement(getAreaIdQuery)) {
+                    areaStatement.setString(1, area);
+                    ResultSet areaResult = areaStatement.executeQuery();
+                    if (areaResult.next()) {
+                        areaId = areaResult.getInt("area_id");
+                    } else {
+                        throw new SQLException("Area not found: " + area);
+                    }
+                }
+
+                // Insert into plant_information
+                String insertPlantInfo = "INSERT INTO plant_species (plant_species_id, plant_area_id) VALUES (?, ?)";
+                try (PreparedStatement plantInfoStatement = connection.prepareStatement(insertPlantInfo)) {
+                    plantInfoStatement.setInt(1, speciesId);
+                    plantInfoStatement.setInt(2, areaId);
+                    plantInfoStatement.executeUpdate();
+                }
+
+                // Commit transaction
+                connection.commit();
+                System.out.println("Plant, Species, Type, and Area information added successfully.");
             }
         } catch (SQLException e) {
             try {
@@ -241,6 +309,7 @@ public class AddController {
 
         clearPlantFields();
     }
+
 
     @FXML
     private void handleAddAnimal(ActionEvent actionEvent) {
@@ -386,7 +455,7 @@ public class AddController {
 
     @FXML
     public void exit(ActionEvent actionEvent) {
-        // Implement exit logic here
+
     }
 
     private void clearAnimalFields() {

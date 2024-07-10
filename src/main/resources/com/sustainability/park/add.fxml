@@ -103,7 +103,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea layoutX="116.0" layoutY="252.0" prefHeight="104.0" prefWidth="368.0" promptText="DESCRIPTION" />
+                        <TextArea layoutX="116.0" layoutY="253.0" prefHeight="104.0" prefWidth="368.0" promptText="DESCRIPTION" />
                         <DatePicker layoutX="135.0" layoutY="138.0" prefHeight="35.0" prefWidth="130.0" promptText="DATE STARTED" />
                         <DatePicker layoutX="135.0" layoutY="196.0" prefHeight="35.0" prefWidth="130.0" promptText="DATE ENDED" />
                         <Text layoutX="200.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INITIATIVES" textAlignment="CENTER" wrappingWidth="200.53668212890625">

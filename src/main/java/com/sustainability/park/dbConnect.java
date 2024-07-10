@@ -26,8 +26,17 @@ public class dbConnect {
 
         // Proceed to establish the connection
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/ecoparksustain", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ecoparksustain", "root", "");
         } catch (Exception e) {
+
+
+
+
+
+
+
+
+
             System.out.println("Error connecting to the database: " + e.getMessage());
             logger.log(Level.SEVERE, "Database error during login", e);
         }

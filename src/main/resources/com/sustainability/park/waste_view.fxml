@@ -9,16 +9,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sustainability.park.PlantsController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sustainability.park.WasteController">
     <center>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="612.0" prefWidth="800.0" BorderPane.alignment="CENTER">
             <children>
-                <TableView layoutX="73.0" layoutY="113.0" prefHeight="350.0" prefWidth="654.0">
+                <TableView fx:id="wasteTableView" layoutX="73.0" layoutY="113.0" prefHeight="350.0" prefWidth="654.0">
                     <columns>
-                        <TableColumn prefWidth="75.0" text="ID" />
-                        <TableColumn prefWidth="112.79998779296875" text="WASTE TYPE" />
-                        <TableColumn prefWidth="116.0" text="DISPOSAL DATE" />
-                        <TableColumn minWidth="9.60009765625" prefWidth="83.20001220703125" text="AREA" />
+                        <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="typeColumn" prefWidth="112.79998779296875" text="WASTE TYPE" />
+                        <TableColumn fx:id="disposalDateColumn" prefWidth="116.0" text="DISPOSAL DATE" />
+                        <TableColumn fx:id="areaColumn" minWidth="9.60009765625" prefWidth="83.20001220703125" text="AREA" />
                     </columns>
                 </TableView>
                 <ImageView fitHeight="612.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" />
